@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Year -->
+        <TextView
+            android:id="@+id/yearTextView"
+            android:text="Year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Poster Image -->
+        <ImageView
+            android:id="@+id/posterImageView"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Rated -->
+        <TextView
+            android:id="@+id/ratedTextView"
+            android:text="Rated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Released -->
+        <TextView
+            android:id="@+id/releasedTextView"
+            android:text="Released"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Runtime -->
+        <TextView
+            android:id="@+id/runtimeTextView"
+            android:text="Runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Genre -->
+        <TextView
+            android:id="@+id/genreTextView"
+            android:text="Genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Director -->
+        <TextView
+            android:id="@+id/directorTextView"
+            android:text="Director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Writer -->
+        <TextView
+            android:id="@+id/writerTextView"
+            android:text="Writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Actors -->
+        <TextView
+            android:id="@+id/actorsTextView"
+            android:text="Actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Plot -->
+        <TextView
+            android:id="@+id/plotTextView"
+            android:text="Plot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Language -->
+        <TextView
+            android:id="@+id/languageTextView"
+            android:text="Language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Country -->
+        <TextView
+            android:id="@+id/countryTextView"
+            android:text="Country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Awards -->
+        <TextView
+            android:id="@+id/awardsTextView"
+            android:text="Awards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- IMDB ID -->
+        <TextView
+            android:id="@+id/imdbIdTextView"
+            android:text="ImDbId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Ratings -->
+        <TextView
+            android:id="@+id/ratingsTextView"
+            android:text="Ratings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Metascore -->
+        <TextView
+            android:id="@+id/metascoreTextView"
+            android:text="Metascore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- IMDB Rating -->
+        <TextView
+            android:id="@+id/imdbRatingTextView"
+            android:text="IMDB Rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- IMDB Votes -->
+        <TextView
+            android:id="@+id/imdbVotesTextView"
+            android:text="IMDB Votes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Box Office -->
+        <TextView
+            android:id="@+id/boxOfficeTextView"
+            android:text="Box Office"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Production -->
+        <TextView
+            android:id="@+id/productionTextView"
+            android:text="Production"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Website -->
+        <TextView
+            android:id="@+id/websiteTextView"
+            android:text="Website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+</ScrollView>
