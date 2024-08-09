@@ -61,12 +61,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         private ImageView posterImageView;
         private Button favoriteButton;
 
+        private SharedViewModel sharedViewModel;
+
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             yearTextView = itemView.findViewById(R.id.yearTextView);
             posterImageView = itemView.findViewById(R.id.posterImageView);
             favoriteButton = itemView.findViewById(R.id.favoriteButton);
+            sharedViewModel = new SharedViewModel();
         }
 
         public void bind(Movie movie) {
@@ -79,12 +82,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             favoriteButton.setOnClickListener(v -> {
                 if (isFavorite(movie)) {
                     dbHelper.removeFavorite(movie.getTitle());
+                    sharedViewModel.removeFavorite(movie); // Update SharedViewModel
                 } else {
                     dbHelper.addFavorite(movie);
+                    sharedViewModel.addFavorite(movie); // Update SharedViewModel
                 }
                 // Only update the button text to reflect the change
                 updateFavoriteButton(movie);
             });
+
         }
 
         private void updateFavoriteButton(Movie movie) {

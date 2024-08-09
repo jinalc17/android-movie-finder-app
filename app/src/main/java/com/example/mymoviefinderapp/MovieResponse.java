@@ -24,7 +24,7 @@ public class MovieResponse {
     private String Production;
     private String Website;
     private String Poster;
-    private List<Rating> Ratings; // Assuming this is a list of ratings
+    private List<Rating> Ratings;
     private List<Movie> Search;
 
     // Getters and setters

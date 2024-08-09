@@ -83,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(v -> searchMovies());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Call the search method to refresh the movie list
+        searchMovies();
+    }
+
+
     private void searchMovies() {
         String query = searchField.getText().toString().trim();
         if (!query.isEmpty()) {

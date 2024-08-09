@@ -1,5 +1,7 @@
 package com.example.mymoviefinderapp;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,6 +24,7 @@ public class SharedViewModel extends ViewModel {
         if (currentFavorites != null) {
             currentFavorites.add(movie);
             setFavoriteMovies(currentFavorites);
+            Log.d("SharedViewModel", "Favorite added: " + movie.getTitle());
         }
     }
 
@@ -30,6 +33,7 @@ public class SharedViewModel extends ViewModel {
         if (currentFavorites != null) {
             currentFavorites.remove(movie);
             setFavoriteMovies(currentFavorites);
+            Log.d("SharedViewModel", "Favorite removed: " + movie.getTitle());
         }
     }
 }
