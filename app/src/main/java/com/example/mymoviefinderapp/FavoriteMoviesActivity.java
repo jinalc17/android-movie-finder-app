@@ -13,7 +13,6 @@ import java.util.List;
 public class FavoriteMoviesActivity extends AppCompatActivity {
 
     private ActivityFavoriteMoviesBinding binding;
-    private MovieAdapter adapter;
     private DatabaseHelper dbHelper;
     private SharedViewModel sharedViewModel;
 
@@ -45,7 +44,7 @@ public class FavoriteMoviesActivity extends AppCompatActivity {
 
     private void loadFavorites() {
         List<Movie> favoriteMovies = dbHelper.getAllFavorites();
-        adapter = new MovieAdapter(this, favoriteMovies);
+        MovieAdapter adapter = new MovieAdapter(this, favoriteMovies);
         binding.recyclerViewFavorites.setAdapter(adapter);
 
         // Update SharedViewModel with new favorites

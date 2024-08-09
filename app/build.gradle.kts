@@ -63,4 +63,8 @@ dependencies {
     // Glide dependencies
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
+
+    // Lombok dependency
+    implementation("org.projectlombok:lombok:1.18.26")
+    annotationProcessor("org.projectlombok:lombok:1.18.26")
 }

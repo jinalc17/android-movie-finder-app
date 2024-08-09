@@ -3,16 +3,13 @@ package com.example.mymoviefinderapp;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.mymoviefinderapp.databinding.ItemMovieBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private List<Movie> movieList;
-    private DatabaseHelper dbHelper;
+    private final DatabaseHelper dbHelper;
 
     public MovieAdapter(Context context, List<Movie> movieList) {
         this.movieList = movieList != null ? movieList : new ArrayList<>();
@@ -30,8 +27,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
-        return new MovieViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemMovieBinding binding = ItemMovieBinding.inflate(layoutInflater, parent, false);
+        return new MovieViewHolder(binding);
     }
 
     @Override
@@ -56,30 +54,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        private TextView titleTextView;
-        private TextView yearTextView;
-        private ImageView posterImageView;
-        private Button favoriteButton;
+        private final ItemMovieBinding binding;
+        private final SharedViewModel sharedViewModel;
 
-        private SharedViewModel sharedViewModel;
-
-        public MovieViewHolder(@NonNull View itemView) {
-            super(itemView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);
-            yearTextView = itemView.findViewById(R.id.yearTextView);
-            posterImageView = itemView.findViewById(R.id.posterImageView);
-            favoriteButton = itemView.findViewById(R.id.favoriteButton);
-            sharedViewModel = new SharedViewModel();
+        public MovieViewHolder(ItemMovieBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            this.sharedViewModel = new SharedViewModel();
         }
 
         public void bind(Movie movie) {
-            titleTextView.setText(movie.getTitle());
-            yearTextView.setText(movie.getYear());
-            Glide.with(posterImageView.getContext()).load(movie.getPoster()).into(posterImageView);
+            binding.titleTextView.setText(movie.getTitle());
+            binding.yearTextView.setText(movie.getYear());
+            Glide.with(binding.posterImageView.getContext()).load(movie.getPoster()).into(binding.posterImageView);
 
             updateFavoriteButton(movie);
 
-            favoriteButton.setOnClickListener(v -> {
+            binding.favoriteButton.setOnClickListener(v -> {
                 if (isFavorite(movie)) {
                     dbHelper.removeFavorite(movie.getTitle());
                     sharedViewModel.removeFavorite(movie); // Update SharedViewModel
@@ -95,9 +86,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         private void updateFavoriteButton(Movie movie) {
             if (isFavorite(movie)) {
-                favoriteButton.setText("Remove from Favorites");
+                binding.favoriteButton.setText(R.string.remove_from_favorites);
             } else {
-                favoriteButton.setText("Add to Favorites");
+                binding.favoriteButton.setText(R.string.add_to_favorites);
             }
         }
 

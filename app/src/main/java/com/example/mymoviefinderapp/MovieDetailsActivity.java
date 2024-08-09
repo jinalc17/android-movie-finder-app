@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -48,6 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .build();
 
         gson = new Gson();
+        assert title != null;
         fetchMovieDetails(title);
     }
 
@@ -61,15 +63,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(MovieDetailsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    runOnUiThread(() -> Toast.makeText(MovieDetailsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     if (response.isSuccessful()) {
+                        assert response.body() != null;
                         String jsonResponse = response.body().string();
                         MovieResponse movieResponse = gson.fromJson(jsonResponse, MovieResponse.class);
 
@@ -81,9 +82,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        runOnUiThread(() -> {
-                            Toast.makeText(MovieDetailsActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
-                        });
+                        runOnUiThread(() -> Toast.makeText(MovieDetailsActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show());
                     }
                 }
             });
@@ -92,26 +91,25 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private void setMovieDetails(MovieResponse movieResponse) {
         binding.titleTextView.setText(movieResponse.getTitle());
-        binding.yearTextView.setText("Year: " + movieResponse.getYear());
-        binding.ratedTextView.setText("Rated: " + movieResponse.getRated());
-        binding.releasedTextView.setText("Released: " + movieResponse.getReleased());
-        binding.runtimeTextView.setText("Runtime: " + movieResponse.getRuntime());
-        binding.genreTextView.setText("Genre: " + movieResponse.getGenre());
-        binding.directorTextView.setText("Director: " + movieResponse.getDirector());
-        binding.writerTextView.setText("Writer: " + movieResponse.getWriter());
-        binding.actorsTextView.setText("Actors: " + movieResponse.getActors());
-        binding.plotTextView.setText("Plot: " + movieResponse.getPlot());
-        binding.languageTextView.setText("Language: " + movieResponse.getLanguage());
-        binding.countryTextView.setText("Country: " + movieResponse.getCountry());
-        binding.awardsTextView.setText("Awards: " + movieResponse.getAwards());
-        binding.imdbIdTextView.setText("IMDb ID: " + movieResponse.getImdbID());
-        binding.ratingsTextView.setText("IMDb Rating: " + movieResponse.getImdbRating() +
-                "\nRotten Tomatoes: " + movieResponse.getRatings().get(1).getValue());
-        binding.metascoreTextView.setText("Meta Score: " + movieResponse.getMetascore());
-        binding.imdbVotesTextView.setText("IMDb Votes: " + movieResponse.getImdbVotes());
-        binding.boxOfficeTextView.setText("Box Office: " + movieResponse.getBoxOffice());
-        binding.productionTextView.setText("Production: " + movieResponse.getProduction());
-        binding.websiteTextView.setText("Website: " + movieResponse.getWebsite());
+        binding.yearTextView.setText(String.format("%s%s", getString(R.string.year), movieResponse.getYear()));
+        binding.ratedTextView.setText(String.format("%s%s", getString(R.string.rated), movieResponse.getRated()));
+        binding.releasedTextView.setText(String.format("%s%s", getString(R.string.released), movieResponse.getReleased()));
+        binding.runtimeTextView.setText(String.format("%s%s", getString(R.string.runtime), movieResponse.getRuntime()));
+        binding.genreTextView.setText(String.format("%s%s", getString(R.string.genre), movieResponse.getGenre()));
+        binding.directorTextView.setText(String.format("%s%s", getString(R.string.director), movieResponse.getDirector()));
+        binding.writerTextView.setText(String.format("%s%s", getString(R.string.writer), movieResponse.getWriter()));
+        binding.actorsTextView.setText(String.format("%s%s", getString(R.string.actors), movieResponse.getActors()));
+        binding.plotTextView.setText(String.format("%s%s", getString(R.string.plot), movieResponse.getPlot()));
+        binding.languageTextView.setText(String.format("%s%s", getString(R.string.language), movieResponse.getLanguage()));
+        binding.countryTextView.setText(String.format("%s%s", getString(R.string.country), movieResponse.getCountry()));
+        binding.awardsTextView.setText(String.format("%s%s", getString(R.string.awards), movieResponse.getAwards()));
+        binding.imdbIdTextView.setText(String.format("%s%s", getString(R.string.imdb_id), movieResponse.getImdbID()));
+        binding.ratingsTextView.setText(String.format("%s%s%s%s", getString(R.string.imdb_rating), movieResponse.getImdbRating(), getString(R.string.nrotten_tomatoes), movieResponse.getRatings().get(1).getValue()));
+        binding.metascoreTextView.setText(String.format("%s%s", getString(R.string.meta_score), movieResponse.getMetascore()));
+        binding.imdbVotesTextView.setText(String.format("%s%s", getString(R.string.imdb_votes), movieResponse.getImdbVotes()));
+        binding.boxOfficeTextView.setText(String.format("%s%s", getString(R.string.box_office), movieResponse.getBoxOffice()));
+        binding.productionTextView.setText(String.format("%s%s", getString(R.string.production), movieResponse.getProduction()));
+        binding.websiteTextView.setText(String.format("%s%s", getString(R.string.website), movieResponse.getWebsite()));
 
         // Load the poster image using Glide
         Glide.with(this).load(movieResponse.getPoster()).into(binding.posterImageView);

@@ -81,11 +81,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Movie> getAllFavorites() {
         Log.d(TAG, "Fetching all favorite movies");
         List<Movie> favorites = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = null;
 
-        try {
-            cursor = db.query(TABLE_FAVORITES, null, null, null, null, null, null);
+        try (SQLiteDatabase db = this.getReadableDatabase(); Cursor cursor = db.query(TABLE_FAVORITES, null, null, null, null, null, null)) {
 
             int titleIndex = cursor.getColumnIndex(COLUMN_TITLE);
             int yearIndex = cursor.getColumnIndex(COLUMN_YEAR);
@@ -112,11 +109,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d(TAG, "Number of favorite movies fetched: " + favorites.size());
         } catch (SQLException e) {
             Log.e(TAG, "Error fetching favorite movies: " + e.getMessage());
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
         }
         return favorites;
     }
@@ -124,9 +116,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void removeFavorite(String title) {
         Log.d(TAG, "Removing movie from favorites: " + title);
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        try {
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
             int rowsAffected = db.delete(TABLE_FAVORITES, COLUMN_TITLE + "=?", new String[]{title});
             if (rowsAffected == 0) {
                 Log.e(TAG, "Failed to remove movie from favorites");
@@ -135,8 +126,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         } catch (SQLException e) {
             Log.e(TAG, "Error removing movie from favorites: " + e.getMessage());
-        } finally {
-            db.close();
         }
     }
 }
