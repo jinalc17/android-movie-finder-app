@@ -79,7 +79,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Movie> getAllFavorites() {
-        Log.d(TAG, "Fetching all favorite movies");
         List<Movie> favorites = new ArrayList<>();
 
         try (SQLiteDatabase db = this.getReadableDatabase(); Cursor cursor = db.query(TABLE_FAVORITES, null, null, null, null, null, null)) {
@@ -87,9 +86,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int titleIndex = cursor.getColumnIndex(COLUMN_TITLE);
             int yearIndex = cursor.getColumnIndex(COLUMN_YEAR);
             int posterIndex = cursor.getColumnIndex(COLUMN_POSTER);
-
-            // Log the indices to ensure they are valid
-            Log.d(TAG, "titleIndex: " + titleIndex + ", yearIndex: " + yearIndex + ", posterIndex: " + posterIndex);
 
             if (titleIndex == -1 || yearIndex == -1 || posterIndex == -1) {
                 Log.e(TAG, "Error: One or more columns not found in the cursor");
@@ -106,8 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     favorites.add(movie);
                 } while (cursor.moveToNext());
             }
-            Log.d(TAG, "Number of favorite movies fetched: " + favorites.size());
-        } catch (SQLException e) {
+             } catch (SQLException e) {
             Log.e(TAG, "Error fetching favorite movies: " + e.getMessage());
         }
         return favorites;

@@ -23,7 +23,7 @@
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="Search"
 
@@ -36,7 +36,7 @@
 
     <Button
         android:id="@+id/favoritesButton"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="Favorites"
         app:layout_constraintBottom_toBottomOf="parent"

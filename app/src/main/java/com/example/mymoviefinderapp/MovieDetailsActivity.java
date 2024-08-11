@@ -35,7 +35,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Set up back button
-        binding.backButton.setOnClickListener(v -> onBackPressed());
+        binding.backButton.setOnClickListener(v -> {
+            // Notify changes to MainActivity and finish
+            Intent resultIntent = new Intent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        });
 
         // Get data from intent
         Intent intent = getIntent();
